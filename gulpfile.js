@@ -4,6 +4,7 @@ var gulp            = require('gulp'),
     path        = require('path'),
     browserSync = require('browser-sync'),
     reload      = browserSync.reload,
+    affected    = require('gulp-jade-find-affected'),
     sass        = require('gulp-sass');
 
 gulp.task('browser-sync', function() {
@@ -26,12 +27,8 @@ gulp.task('compass', function() {
 
 gulp.task('js', function() {
   return gulp.src('src/scripts/*.js')
-    .pipe($.plumber())
-    .pipe( $.browserify({
-      debug: true
-    }))
+    .pipe( $.concat('app.js') )
     .pipe( $.uglify() )
-    .pipe( $.rename('app.js'))
     .pipe( gulp.dest('dist/scripts/'));
 });
 
@@ -43,6 +40,7 @@ gulp.task('images', function() {
 gulp.task('templates', function() {
   return gulp.src('src/*.jade')
     .pipe($.plumber())
+    .pipe( affected() )
     .pipe($.jade({
       pretty: true
     }))

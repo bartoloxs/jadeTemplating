@@ -17,6 +17,9 @@
     "gulp-sass": "~0.4.1",
     "gulp-uglify": "~0.1.0",
     "gulp-util": "~2.2.12",
-    "marked": "~0.3.0"  
+    "marked": "~0.3.0"
+  },
+  "devDependencies": {
+    "gulp-jade-find-affected": "^0.2.1"
   }
 }
